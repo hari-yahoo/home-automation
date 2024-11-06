@@ -1,2 +1,2 @@
-# DocumentCode
-AI driven tool to generate documentation from Source Code
+# Home automation web app
+Web Interface for automation
