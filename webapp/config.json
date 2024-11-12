@@ -1,0 +1,7 @@
+{
+    "serialPort" : "COM8", 
+    "servoPin" : 8,
+    "delay": 0.1,
+    "linuxNotUsed" : "/dev/ttyACM3"
+    
+}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article>
+    <header>List Page </header>
+    <table class="striped">
+        <!-- <caption>One</caption> -->
+        <thead>
+            <tr>
+               {% block column_titles %} {% endblock %}
+            </tr>
+        </thead>
+        <tbody>
+            {% block rows %}
+            {% endblock %}  
+        </tbody>
+    </table>
+    <a role="button" id="new" href="/devices">New</a>
+</article>
+{% endblock %}

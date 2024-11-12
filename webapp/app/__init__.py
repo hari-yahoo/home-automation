@@ -1,22 +1,23 @@
 from flask import Flask
 from .config import config
-
+from .models.db import init_db
+from .models.device import Device
 def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
-    #config[config_name].init_app(app)
+    settings = config[config_name]
 
-    #db.init_app(app)
-
-
+    
+    init_db(app, settings)
+   
     from .main import main as main_bp
-    app.register_blueprint(main_bp, url_prefix='/main')
+    app.register_blueprint(main_bp, url_prefix='/')
 
-    from .auth import auth as auth_bp
-    app.register_blueprint(auth_bp, url_prefix='/auth')
+   
 
-    from .api import api as api_bp
-    app.register_blueprint(api_bp, url_prefix='/api')
-
+    from .device import device as device_bp
+    app.register_blueprint(device_bp, url_prefix='/devices')
+    
+    
 
     return app

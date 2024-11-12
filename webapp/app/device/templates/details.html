@@ -1,0 +1,70 @@
+{% extends "detail_page.html" %}
+
+{% block title %}Device{% endblock %}
+
+{% block action %}/devices{% endblock %}
+{% block form_elements %}
+
+   
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" value="{{device.name}}" required>
+    <label for="dtype">Type</label>
+    <input type="text" id="dtype" name="dtype" value="{{device.device_type}}" required>
+   
+
+    <label for="pin">Pin</label>
+    <input type="number" id="pin" name="pin" value="{{device.pin}}" required>
+    <label for="location">Location</label>
+    <input type="text" id="location" name="location" value="{{device.location}}" required>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    $(() => {
+
+        let deviceId = undefined;
+        {% if device.id %}
+        deviceId = {{ device.id }}
+    
+        {% endif %}
+
+        $('.detailform').submit((e) => {
+            e.preventDefault(); // Prevent form submission
+            console.log(deviceId)
+            info = {
+                id: deviceId,
+                name: $('#name').val(),
+                dtype: $('#dtype').val(),
+                pin: $('#pin').val(),
+                location: $('#location').val(),
+                state: "Off"
+            }
+            if (deviceId) {
+                $.ajax({
+                    type: "PUT",
+                    url: '/devices/' + deviceId,
+                    data: info,
+                    success: (data) => {
+                        console.log(data)
+
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: '/devices/',
+                    data: info,
+                    success: (data) => {
+                        console.log(data)
+
+                    }
+                });
+            }
+        });
+
+    })
+
+</script>
+{% endblock %}

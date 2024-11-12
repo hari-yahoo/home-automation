@@ -1,11 +1,46 @@
-
 {% extends "base.html" %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1>Index</h1>
-    <p >
-      {{bp_name}}
-    </p>
+<main class="container-fluid">
+    <div class="centered">
+
+        <section class="cards">
+            {% for device in devices %}
+            <article class="box">
+                <p>{{ device.name }}</p>
+                <p>{{ device.device_type }}</p>
+                <p>{{ device.location }}</p>
+                <button class="action" data-device={{ device.id }} value="on">On</button>
+                <button class="action" data-device={{ device.id }} value="off">Off</button>
+            </article>
+                
+
+            {% endfor %}
+           
+        </section>
+    </div>
+</main>
+
+<script>
+    $(() => {
+        
+        $('button.action').click((e) => {
+           
+            const deviceId = $(e.target).data('device')
+            const state = $(e.target).val()
+
+            $.ajax({
+                type: "PUT",
+                url: '/devices/' + deviceId + '/' + state,
+                data: {},
+                success: (data) => {
+                    console.log(data)
+                }
+            });
+           
+        })
+    })
+</script>
 {% endblock %}

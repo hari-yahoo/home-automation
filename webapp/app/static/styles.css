@@ -1,0 +1,63 @@
+:root {
+    --pico-line-height: 1;
+    --pico-font-size: 100%;
+    --pico-background-color: #29353c  
+    
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  /* background-color: #44576D; */
+ 
+}
+
+.header {
+  /* height: 30px; */
+  display: flex;
+  align-items: center;
+  
+}
+
+#headerContent {
+  margin-left: 10px;
+}
+
+.page {
+  display: flex;
+  height: calc( 100vh - 30px);
+  /* calculate the height. Header is 30px */
+}
+
+.sideBar {
+  width: 240px;
+  /* border-right: 1px solid ivory; */
+}
+
+.content {
+  padding: 5px;
+  flex: 1 0 auto;
+  /* enable grow, disable shrink */
+}
+
+.device {
+  width: 130px;
+  height: 120px;
+  background-color: ivory;
+  border-radius: 1%;
+  padding:3px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.box {
+   flex: 0 1 24%;
+}

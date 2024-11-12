@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article>
+    <form class="detailform" action="{% block action %}{% endblock %}" method="POST">
+        <fieldset>
+            {% block form_elements %} {% endblock %}
+            <button type="submit">Submit</button>
+            
+        </fieldset>
+    </form>
+</article>
+
+{% block scripts %}{% endblock %}
+
+{% endblock %}

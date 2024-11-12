@@ -1,0 +1,52 @@
+{% extends "list_page.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block column_titles %}
+<tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Location</th>
+    <th>Schedule</th>
+    <th>State</th>
+    <th>Action</th>
+</tr>
+{% endblock %}
+
+
+{% block rows %}
+{% for device in devices %}
+<tr>
+    <td>{{ device.name }}</td>
+    <td>{{ device.type }}</td>
+    <td>{{ device.location }}</td>
+    <td>{{ device.schedule }}</td>
+    <td>{{ device.state }}</td>
+    <td><button class="action" data-device={{ device.id }} value="on">On</button>
+        <button class="action" data-device={{ device.id }} value="off">Off</button>
+        <a href="/devices/{{device.id}}" class="configure" role="button">Configure</a>
+    </td>
+</tr>
+{% endfor %}
+
+<script>
+    $(() => {
+        
+        $('button.action').click((e) => {
+           
+            const deviceId = $(e.target).data('device')
+            const state = $(e.target).val()
+
+            $.ajax({
+                type: "PUT",
+                url: '/devices/' + deviceId + '/' + state,
+                data: {},
+                success: (data) => {
+                    console.log(data)
+                }
+            });
+           
+        })
+    })
+</script>
+{% endblock %}
