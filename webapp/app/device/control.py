@@ -1,4 +1,4 @@
-from pyfirmata import Arduino
+from pyfirmata2 import Arduino
 import json
 
 class Controls(object):

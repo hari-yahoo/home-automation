@@ -1,4 +1,4 @@
-from pyfirmata import SERVO
+from pyfirmata2 import SERVO
 from .control import Controls
 import time
 

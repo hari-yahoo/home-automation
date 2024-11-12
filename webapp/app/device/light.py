@@ -1,4 +1,4 @@
-from pyfirmata import SERVO, OUTPUT
+from pyfirmata2 import SERVO, OUTPUT
 from .control import Controls
 
 
