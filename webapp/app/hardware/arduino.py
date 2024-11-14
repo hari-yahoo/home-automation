@@ -16,7 +16,10 @@ class ArduinoUno:
         else:
             print("Board is not initialized.")
             return None
-    
+    def servo_config(self, pin):
+        self.board.servo_config(pin)
+        print(f"Servo on pin {pin} initialized.")
+        
     def close(self):
         if self.board:
             self.board.exit()
