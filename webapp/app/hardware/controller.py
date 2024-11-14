@@ -4,7 +4,11 @@ import RPi.GPIO as GPIO
 class Controller(object):
 
     def __init__(self):
+        
         self.load_config()
+        self.relay_power_pin = self.config["RelayPowerPin"]
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.relay_power_pin, GPIO.OUT)
 
     def load_config(self):
         try:
@@ -15,18 +19,9 @@ class Controller(object):
     
     def turn_off_relay_power(self):
         print("Turning off relay power")
-        pin = self.config["RelayPowerPin"]
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(pin, GPIO.OUT)
-        GPIO.output(pin, GPIO.LOW)
-        
-        #GPIO.cleanup()
+        GPIO.output(self.relay_power_pin, GPIO.LOW)
+       
     
     def turn_on_relay_power(self):
         print("Turning on relay power")
-        pin = self.config["RelayPowerPin"]
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(pin, GPIO.OUT)
-        GPIO.output(pin, GPIO.HIGH)
-        
-        #GPIO.cleanup()
+        GPIO.output(self.relay_power_pin, GPIO.HIGH)
