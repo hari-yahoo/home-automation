@@ -8,23 +8,31 @@ class Feeder(object):
 
     
     def __init__(self, arduino, pin):
-        super().__init__()
+        
         self.position = 0
         self.board = arduino
         self.pin = pin
         self.board.servo_config(self.pin)
-        self.servo = self.board.digital[self.pin]
-        self.servo.mode = SERVO
-        
-        self.servo.write(0) 
+        self.servo = self.board.get_digital_pin(pin)
+        if self.servo is not None:
+            self.servo.mode = SERVO
+            self.servo.write(0)
+            print(f"Digital pin {pin} initialized")
+        else:
+            print(f"Failed to initialize digital pin {pin}")
+       
 
     def feed(self, duration_seconds=1):
-        self.set_position(180, 0.015)
-        time.sleep(duration_seconds)
-        self.set_position(0, 0.015)        
+        if self.servo is not None:
+            self.set_position(180, 0.015)
+            time.sleep(duration_seconds)
+            self.set_position(0, 0.015)        
 
-        print(f"Pet fed for {duration_seconds} seconds.")
-        return True
+            print(f"Pet fed for {duration_seconds} seconds.")
+            return True
+        else:
+            print(f"Failed to start feeding")
+            return False
     
     def off(self):
         pass
@@ -49,4 +57,4 @@ class Feeder(object):
 
     def __del__(self):
         self.close()
-        super().__del__()
+      
