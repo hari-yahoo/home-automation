@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, redirect, render_template, url_for, request
 
+from app.hardware.feeder import Feeder
+from app.hardware.light import Light
+from app.hardware.initializer import Initializer
 from app.models.db import db
 from app.models.device import Device
-from .light import Light
-from .feeder import Feeder
+
 from . import device as bp
 
 
@@ -64,12 +66,12 @@ def turn_on(id, action):
         dtype = device.device_type.lower()
 
         if dtype == "light":
-            light = Light(pin = device.pin)
+            light = Light(Initializer.arduino, pin = device.pin)
             light.on() if action == "on" else light.off()
         elif dtype == "pump":
             print("Pumb")
         elif dtype == "feeder":
-            feeder = Feeder(pin = device.pin)
+            feeder = Feeder(Initializer.arduino, pin = device.pin)
             feeder.feed() if action == "on" else feeder.off()
         else:
             print(f"Unsupported device type: {dtype}")

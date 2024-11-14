@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="grid">
+    <!-- Section for Light Control -->
+    <section>
+      <h4>Light Control</h4>
+      <div class="grid1">
+        <div>
+          <button onclick="controlDevice('light', 'on')">Turn On</button>
+          <button onclick="controlDevice('light', 'off')">Turn Off</button>
+        </div>
+        <div>
+          <label>Schedule</label>
+          <fieldset role="group">
+            <input type="time" id="light-schedule-time">
+            <button onclick="setSchedule('light')">Schedule</button>
+          </fieldset>
+        </div>
+        <div>
+          <p>Status: <span id="light-status">Off</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section for Pump Control -->
+    <section>
+      <h4>Pump Control</h4>
+      <div class="grid1">
+        <div>
+          <button onclick="controlDevice('pump', 'on')">On</button>
+          <button onclick="controlDevice('pump', 'off')">Off</button>
+        </div>
+        <div>
+          <label>Schedule</label>
+          <fieldset role="group">
+          
+          <input type="time" id="pump-schedule-time">
+          <button onclick="setSchedule('pump')">Schedule</button>
+        </fieldset>
+        </div>
+        <div>
+          <p>Status: <span id="pump-status">Off</span></p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- Section for Dog Feeder -->
+  <section>
+    <h2>Dog Feeder</h2>
+    <div class="grid">
+      <button onclick="controlDevice('feeder', 'activate')">Feed Dog</button>
+      <p>Status: <span id="feeder-status">Idle</span></p>
+    </div>
+  </section>
+
+  <!-- Section for IP Cameras -->
+  <section>
+    <h2>IP Cameras</h2>
+    <div class="grid">
+      <div>
+        <h3>Camera 1</h3>
+        <iframe src="http://camera1_ip_address:port" width="100%" height="200"></iframe>
+      </div>
+      <div>
+        <h3>Camera 2</h3>
+        <iframe src="http://camera2_ip_address:port" width="100%" height="200"></iframe>
+      </div>
+      <!-- Add additional cameras as needed -->
+    </div>
+  </section>
+
+  <!-- Section for Two-Way Communication -->
+  <section>
+    <h2>Gate Communication</h2>
+    <button onclick="controlDevice('intercom', 'talk')">Talk</button>
+    <button onclick="controlDevice('intercom', 'listen')">Listen</button>
+    <p>Status: <span id="intercom-status">Idle</span></p>
+  </section>
+
+  <!-- Section for Mobile Camera Control -->
+  <section>
+    <h2>Mobile Camera</h2>
+    <div class="grid">
+      <button onclick="moveCamera('forward')">Forward</button>
+      <button onclick="moveCamera('backward')">Backward</button>
+      <button onclick="moveCamera('left')">Left</button>
+      <button onclick="moveCamera('right')">Right</button>
+      <button onclick="moveCamera('stop')">Stop</button>
+    </div>
+  </section>
+
+  <!-- Section for Alarm -->
+  <section>
+    <h2>Alarm System</h2>
+    <button onclick="controlDevice('alarm', 'activate')">Activate Alarm</button>
+    <button onclick="controlDevice('alarm', 'deactivate')">Deactivate Alarm</button>
+    <p>Status: <span id="alarm-status">Off</span></p>
+  </section>
+
+</div>
+<script>
+  // JavaScript functions for each control
+  function controlDevice(device, action) {
+    // Example AJAX call to Flask API to control the device
+    fetch(`/control/${device}/${action}`)
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById(`${device}-status`).textContent = data.status;
+      });
+  }
+
+  function setSchedule(device) {
+    // Get the schedule time from input
+    const time = document.getElementById(`${device}-schedule-time`).value;
+    fetch(`/schedule/${device}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ time })
+    });
+  }
+
+  function moveCamera(direction) {
+    fetch(`/move_camera/${direction}`);
+  }
+</script>
+{% endblock %}

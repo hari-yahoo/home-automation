@@ -1,13 +1,16 @@
+
 from pyfirmata2 import SERVO
-from .control import Controls
+
 import time
 
 
-class Feeder(Controls):
+class Feeder(object):
 
-    position = 0
-    def __init__(self, pin):
+    
+    def __init__(self, arduino, pin):
         super().__init__()
+        self.position = 0
+        self.board = arduino
         self.pin = pin
         self.board.servo_config(self.pin)
         self.servo = self.board.digital[self.pin]
