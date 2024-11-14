@@ -9,9 +9,11 @@ class Feeder(object):
     
     def __init__(self, arduino, pin):
         
+        self.servo = None
         self.position = 0
         self.board = arduino
         self.pin = pin
+        
         self.board.servo_config(self.pin)
         self.servo = self.board.get_digital_pin(pin)
         if self.servo is not None:
