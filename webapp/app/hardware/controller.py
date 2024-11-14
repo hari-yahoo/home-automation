@@ -19,7 +19,8 @@ class Controller(object):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(pin, GPIO.OUT)
         GPIO.output(pin, GPIO.LOW)
-        GPIO.cleanup()
+        
+        #GPIO.cleanup()
     
     def turn_on_relay_power(self):
         print("Turning on relay power")
@@ -27,4 +28,5 @@ class Controller(object):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(pin, GPIO.OUT)
         GPIO.output(pin, GPIO.HIGH)
-        GPIO.cleanup()
+        
+        #GPIO.cleanup()
