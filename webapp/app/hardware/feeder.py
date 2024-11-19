@@ -23,6 +23,16 @@ class Feeder(object):
         else:
             print(f"Failed to initialize digital pin {pin}")
        
+    def feed_fast(self, duration=1, angle=90):
+        if self.servo is not None:
+            self.servo.write(angle)
+            time.sleep(duration)
+            self.servo.write(0)
+            return True
+        else:
+            print(f"Failed to start feeding")
+            return False
+
 
     def feed(self, duration_seconds=1):
         if self.servo is not None:
@@ -44,13 +54,25 @@ class Feeder(object):
             self.servo.write(0)
  
     
-    def set_position(self, new_position, delay=0.01):
+    def _set_position(self, new_position, delay=0.01):
         # move it slow, rather than setting the desired position directly
         while abs(self.position - new_position) > 0.1:
             if self.position <= new_position:
                 self.position += 1.0
             elif self.position > new_position:
                 self.position -= 1.0
+      
+            self.servo.write(self.position)
+            time.sleep(delay)
+        return
+    
+    def set_position(self, new_position, increment=1.0, delay=0.01):
+        # move it slow, rather than setting the desired position directly
+        while abs(self.position - new_position) > 0.1:
+            if self.position <= new_position:
+                self.position += increment
+            elif self.position > new_position:
+                self.position -= increment
       
             self.servo.write(self.position)
             time.sleep(delay)
