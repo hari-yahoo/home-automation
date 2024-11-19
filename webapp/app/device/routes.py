@@ -72,7 +72,10 @@ def turn_on(id, action):
             print("Pumb")
         elif dtype == "feeder":
             feeder = Feeder(Initializer.arduino, pin = device.pin)
-            feeder.feed() if action == "on" else feeder.off()
+            #feeder.feed() if action == "on" else feeder.off()
+            duration = 0.5
+            angle = 90
+            feeder.feed_fast(duration, angle) if action == "on" else feeder.off()
         else:
             print(f"Unsupported device type: {dtype}")
 

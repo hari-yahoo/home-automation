@@ -6,16 +6,23 @@
 <main class="container-fluid">
     <div class="centered">
 
-        <section class="cards">
+        <section class="card-grid">
             {% for device in devices %}
-            <article class="box">
+            <!-- <article class="box">
                 <p>{{ device.name }}</p>
                 <p>{{ device.device_type }}</p>
                 <p>{{ device.location }}</p>
                 <button class="action" data-device={{ device.id }} value="on">On</button>
                 <button class="action" data-device={{ device.id }} value="off">Off</button>
-            </article>
+            </article> -->
+            <div class="card">
                 
+                <h3>{{ device.name }}</h3>
+                <p>{{ device.device_type }}</p>
+                <p>{{ device.location }}</p>
+                <button class="action" data-device={{ device.id }} value="on">On</button>
+                <button class="action" data-device={{ device.id }} value="off">Off</button>
+            </div>    
 
             {% endfor %}
            
