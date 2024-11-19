@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Card Layout</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <style>
+        /* Custom styles for card grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .card {
+            padding: 1rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: var(--gray-50);
+        }
+        .card img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+        }
+        .card h3 {
+            margin: 1rem 0 0.5rem;
+        }
+        .card p {
+            margin: 0 0 1rem;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Responsive Card Layout</h1>
+        <div class="card-grid">
+            <div class="card">
+                <img src="https://via.placeholder.com/300" alt="Placeholder">
+                <h3>Card Title 1</h3>
+                <p>Some description for card 1. This is where you can add details about the card.</p>
+                <a href="#" class="button">Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300" alt="Placeholder">
+                <h3>Card Title 2</h3>
+                <p>Some description for card 2. Add details or information relevant to this card.</p>
+                <a href="#" class="button">Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300" alt="Placeholder">
+                <h3>Card Title 3</h3>
+                <p>Some description for card 3. Explain the purpose or content of this card.</p>
+                <a href="#" class="button">Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300" alt="Placeholder">
+                <h3>Card Title 4</h3>
+                <p>Some description for card 4. You can include any relevant information here.</p>
+                <a href="#" class="button">Read More</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

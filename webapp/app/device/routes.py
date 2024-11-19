@@ -102,3 +102,11 @@ def servo_test(pin):
     feeder = Feeder(Initializer.arduino, pin = pin)
     feeder.feed_fast(duration=duration, angle=angle)
     return jsonify({"status" : "on"})
+
+
+@bp.route('/light/<int:pin>/<str:action>')
+def test_light(pin, action):
+    light = Light(Initializer.arduino, pin = pin)
+    light.on() if action == "on" else light.off()
+    
+    return jsonify({"status" : "on"})
