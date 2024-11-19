@@ -83,8 +83,8 @@ def turn_on(id, action):
 
 @bp.route("/<int:pin>/turn")
 def servo_test(pin):
-    duration = request.args.get('duration')
-    angle = request.args.get('angle')
+    duration = int(request.args.get('duration'))
+    angle = int(request.args.get('angle'))
     print(angle)
     print(duration)
     
