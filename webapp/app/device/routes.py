@@ -83,11 +83,19 @@ def turn_on(id, action):
 
 @bp.route("/<int:pin>/turn")
 def servo_test(pin):
-    duration = int(request.args.get('duration'))
-    angle = int(request.args.get('angle'))
-    print(angle)
-    print(duration)
+    dur = request.args.get('duration')
+    ang = request.args.get('angle')
     
+    if dur == None:
+        duration = 0.5
+    else:
+        duration = float(dur)
+    
+    if ang == None:
+        angle = 90
+    else:
+        angle = float(ang)
+        
     feeder = Feeder(Initializer.arduino, pin = pin)
     feeder.feed_fast(duration=duration, angle=angle)
     return jsonify({"status" : "on"})
